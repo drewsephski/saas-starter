@@ -7,8 +7,8 @@ import { Sparkles, Zap, Check, Shield, BarChart, Code, ZapIcon, Infinity as Infi
 const demoPlans: PricingPlan[] = [
   {
     name: "STARTER",
-    price: "50",
-    yearlyPrice: "40",
+    price: "12",
+    yearlyPrice: "8",
     period: "per month",
     features: [
       "Up to 10 projects",
@@ -27,8 +27,8 @@ const demoPlans: PricingPlan[] = [
   },
   {
     name: "PROFESSIONAL",
-    price: "99",
-    yearlyPrice: "79",
+    price: "30",
+    yearlyPrice: "20",
     period: "per month",
     features: [
       "Unlimited projects",
@@ -48,8 +48,8 @@ const demoPlans: PricingPlan[] = [
   },
   {
     name: "ENTERPRISE",
-    price: "199",
-    yearlyPrice: "159",
+    price: "60",
+    yearlyPrice: "42",
     period: "per month",
     features: [
       "Unlimited projects",
@@ -82,8 +82,8 @@ const container = {
 
 const item = {
   hidden: { opacity: 0, y: 20 },
-  show: { 
-    opacity: 1, 
+  show: {
+    opacity: 1,
     y: 0,
     transition: {
       duration: 0.6,
@@ -95,7 +95,7 @@ const item = {
 export function PricingDemo() {
   return (
     <div className="w-full">
-      <motion.div 
+      <motion.div
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: "-100px" }}
@@ -103,7 +103,7 @@ export function PricingDemo() {
         className="relative"
       >
         {/* Animated background elements */}
-        <motion.div 
+        <motion.div
           className="absolute -top-20 -left-20 w-64 h-64 bg-gradient-to-r from-orange-500/20 to-pink-500/20 rounded-full mix-blend-multiply filter blur-3xl opacity-70 dark:opacity-30 animate-blob"
           animate={{
             scale: [1, 1.1, 1],
@@ -116,7 +116,7 @@ export function PricingDemo() {
             repeatType: "reverse",
           }}
         />
-        <motion.div 
+        <motion.div
           className="absolute -bottom-20 -right-20 w-72 h-72 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-full mix-blend-multiply filter blur-3xl opacity-70 dark:opacity-30 animate-blob"
           animate={{
             scale: [1, 1.1, 1],
@@ -130,14 +130,14 @@ export function PricingDemo() {
             delay: 2,
           }}
         />
-        
-        <Pricing 
+
+        <Pricing
           plans={demoPlans}
           title="Simple, Transparent Pricing"
-          description="Choose the plan that works for you\nAll plans include access to our platform, lead generation tools, and dedicated support."
+          description="Choose the plan that works for you. All plans include access to our platform, lead generation tools, and dedicated support."
         />
-        
-        <motion.div 
+
+        <motion.div
           variants={item}
           className="mt-12 text-center text-sm text-muted-foreground"
         >
