@@ -27,6 +27,9 @@ export default function RootLayout({
       lang="en"
       className={`bg-gray-400 dark:bg-gray-950 text-black dark:text-white ${manrope.className}`}
     >
+      <head>
+        <link rel="preload" href="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode" as="fetch" crossOrigin="anonymous" />
+      </head>
       <body className="min-h-[100dvh] bg-gray-400 dark:bg-gray-950 flex flex-col">
         <SWRConfig
           value={{

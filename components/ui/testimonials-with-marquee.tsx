@@ -12,11 +12,11 @@ interface TestimonialsSectionProps {
   className?: string
 }
 
-export function TestimonialsSection({ 
+export function TestimonialsSection({
   title,
   description,
   testimonials,
-  className 
+  className
 }: TestimonialsSectionProps) {
   return (
     <section className={cn(
@@ -39,12 +39,12 @@ export function TestimonialsSection({
             <div className="flex shrink-0 justify-around [gap:var(--gap)] animate-marquee flex-row group-hover:[animation-play-state:paused]">
               {[...Array(4)].map((_, setIndex) => (
                 testimonials.map((testimonial, i) => (
-                  <TestimonialCard 
+                  <TestimonialCard
                     key={`${setIndex}-${i}`}
-                    {...testimonial}
-                  />
-                ))
-              ))}
+                    {...(testimonial.href ? { ...testimonial, href: '/app' + testimonial.href } : testimonial)}
+                   />
+                 ))
+               ))}
             </div>
           </div>
 

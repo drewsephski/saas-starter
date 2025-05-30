@@ -58,7 +58,7 @@ export default function FeaturesSectionDemo() {
       icon: <IconHeart className="w-6 h-6" />,
     },
   ];
-  
+
   return (
     <div className="w-full py-16 md:py-24 lg:py-32 bg-gradient-to-b from-gray-900 to-gray-950">
       <div className="container px-4 md:px-6">
@@ -66,11 +66,11 @@ export default function FeaturesSectionDemo() {
           <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl mb-4">
             Everything you need
           </h2>
-          <p className="mx-auto max-w-[700px] text-gray-300 md:text-xl">
+          <p className="mx-auto w-full max-w-xl text-center text-gray-300 md:text-xl">
             Powerful features to help you build faster and ship more efficiently.
           </p>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 relative z-10">
           {features.map((feature, index) => (
             <Feature key={feature.title} {...feature} index={index} />
@@ -109,7 +109,7 @@ const Feature = ({
           {title}
         </span>
       </div>
-      <p className="text-sm text-gray-400 max-w-xs relative z-10 ml-4">
+      <p className="text-sm text-gray-400 max-w-xs relative z-10">
         {description}
       </p>
     </div>

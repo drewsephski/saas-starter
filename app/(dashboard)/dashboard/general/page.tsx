@@ -66,8 +66,8 @@ function AccountFormWithData({ state }: { state: ActionState }) {
   return (
     <AccountForm
       state={state}
-      nameValue={user?.name ?? ''}
-      emailValue={user?.email ?? ''}
+      nameValue={user?.name ?? ""}
+      emailValue={user?.email ?? ""}
     />
   );
 }

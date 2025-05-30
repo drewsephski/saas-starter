@@ -19,7 +19,7 @@ const demoPlans: PricingPlan[] = [
     ],
     description: "Perfect for individuals and small projects",
     buttonText: "Start Free Trial",
-    href: "/sign-up",
+    href: "/(login)/sign-up",
     isPopular: false,
     icon: <Zap className="h-5 w-5 text-blue-500" />,
     badge: "Starter",
@@ -40,7 +40,7 @@ const demoPlans: PricingPlan[] = [
     ],
     description: "For growing teams and businesses",
     buttonText: "Get Started",
-    href: "/sign-up",
+    href: "/(login)/sign-up",
     isPopular: true,
     icon: <BarChart className="h-5 w-5 text-purple-500" />,
     badge: "Most Popular",
@@ -61,7 +61,7 @@ const demoPlans: PricingPlan[] = [
     ],
     description: "For large organizations with custom needs",
     buttonText: "Contact Sales",
-    href: "/contact",
+    href: "/(login)/contact",
     isPopular: false,
     icon: <Shield className="h-5 w-5 text-orange-500" />,
     badge: "Enterprise",
@@ -141,7 +141,7 @@ export function PricingDemo() {
           variants={item}
           className="mt-12 text-center text-sm text-muted-foreground"
         >
-          <p>Need something custom? <a href="/contact" className="text-orange-500 hover:underline font-medium">Contact our sales team</a></p>
+          <p>Need something custom? <a href="/(login)/contact" className="text-orange-500 hover:underline font-medium">Contact our sales team</a></p>
         </motion.div>
       </motion.div>
     </div>

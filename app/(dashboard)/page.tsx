@@ -1,16 +1,22 @@
-import { InteractiveHoverButton } from '@/components/magicui/interactive-hover-button';
+"use client";
+
+import { InteractiveHoverButton } from 'components/magicui/interactive-hover-button';
 import { Terminal } from './terminal';
-import { HyperText } from '@/components/magicui/hyper-text';
-import GlareCardDemo from '@/components/glare-card-demo-2';
-import FeaturesSectionDemo from '@/components/ui/features-section-demo-2';
-import { PricingDemo } from '@/components/ui/pricing-demo';
-import { TestimonialsDemo } from '@/components/ui/testimonials-demo';
-import { SplineSceneBasic } from '@/components/ui/spline-demo';
+import { HyperText } from 'components/magicui/hyper-text';
+import GlareCardDemo from 'components/glare-card-demo-2';
+import FeaturesSectionDemo from 'components/ui/features-section-demo-2';
+import { PricingDemo } from 'components/ui/pricing-demo';
+import { TestimonialsDemo } from 'components/ui/testimonials-demo';
+import dynamic from 'next/dynamic';
+
+const SplineSceneBasic = dynamic(() => import('components/ui/spline-demo').then((mod) => mod.SplineSceneBasic), {
+  ssr: false,
+});
 
 export default function HomePage() {
   return (
     <main>
-      <section className="py-20">
+      <section className="py-20" id="hero">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="lg:grid lg:grid-cols-12 lg:gap-8">
             <div className="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left">
@@ -28,12 +34,14 @@ export default function HomePage() {
                 essential integrations.
               </p>
               <div className="mt-8 sm:max-w-lg sm:mx-auto sm:text-center lg:text-left lg:mx-0">
-                <a
-                  href="https://vercel.com/templates/next.js/next-js-saas-starter"
-                  target="_blank"
-                >
+                <a>
                   <InteractiveHoverButton
                     className="text-lg rounded-full"
+                    onClick={() => {
+                      document.getElementById("pricing")?.scrollIntoView({
+                        behavior: "smooth",
+                      });
+                    }}
                   >
                     Deploy your own
                   </InteractiveHoverButton>
@@ -47,14 +55,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-16 bg-white w-full">
+      <section className="py-16 bg-white w-full" id="glare">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <GlareCardDemo />
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="relative overflow-hidden py-16 bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-950 dark:to-gray-900">
+      <section className="relative overflow-hidden py-16 bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-950 dark:to-gray-900" id="features">
         <div className="absolute inset-0 bg-grid-black/[0.03] dark:bg-grid-white/[0.03]" />
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-5xl mx-auto">
@@ -64,7 +72,10 @@ export default function HomePage() {
       </section>
 
       {/* Pricing Section */}
-      <section className="relative py-16 bg-gradient-to-b from-gray-100 to-white dark:from-gray-900 dark:to-gray-950">
+      <section
+        className="relative py-16 bg-gradient-to-b from-gray-100 to-white dark:from-gray-900 dark:to-gray-950"
+        id="pricing"
+      >
         <div className="absolute inset-0 bg-dot-black/[0.05] dark:bg-dot-white/[0.05]" />
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-6xl mx-auto">
@@ -74,7 +85,7 @@ export default function HomePage() {
       </section>
 
       {/* 3D Spline Section */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950">
+      <section className="relative overflow-hidden bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950" id="spline">
         <div className="absolute inset-0 bg-grid-black/[0.05] dark:bg-grid-white/[0.05]" />
         <div className="container mx-auto px-4 py-16 sm:py-24 md:py-32 relative z-10">
           <SplineSceneBasic />
@@ -82,14 +93,14 @@ export default function HomePage() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="relative bg-gradient-to-b from-white to-gray-50 dark:from-gray-950 dark:to-gray-900">
+      <section className="relative bg-gradient-to-b from-white to-gray-50 dark:from-gray-950 dark:to-gray-900" id="testimonials">
         <div className="absolute inset-0 bg-grid-black/[0.02] dark:bg-grid-white/[0.02]" />
         <div className="relative z-10">
           <TestimonialsDemo />
         </div>
       </section>
 
-      <section className="py-16 bg-gray-200 dark:bg-gray-900">
+      <section className="py-16 bg-gray-200 dark:bg-gray-900" id="ready">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
             <div>
@@ -103,7 +114,7 @@ export default function HomePage() {
               </p>
             </div>
             <div className="mt-8 lg:mt-0 flex justify-center lg:justify-end">
-              <a href="https://github.com/nextjs/saas-starter" target="_blank">
+              <a>
                 <InteractiveHoverButton
                   className="text-lg rounded-full"
                 >

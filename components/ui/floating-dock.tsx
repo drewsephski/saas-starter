@@ -51,7 +51,7 @@ const FloatingDockMobile = ({
 }) => {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  
+
   return (
     <div className={cn("relative block md:hidden", className)}>
       <AnimatePresence>
@@ -78,19 +78,17 @@ const FloatingDockMobile = ({
                 transition={{ delay: (items.length - 1 - idx) * 0.05 }}
               >
                 <Link
-                  href={item.href}
+                  href={'/app' + item.href}
                   className={cn(
                     "flex h-10 w-10 items-center justify-center rounded-full transition-colors",
                     pathname === item.href
                       ? "bg-gray-200 dark:bg-neutral-800"
                       : "bg-gray-50 hover:bg-gray-100 dark:bg-neutral-900 dark:hover:bg-neutral-800"
                   )}
-                  onClick={(e) => {
-                    if (item.onClick) {
-                      e.preventDefault();
-                      item.onClick(e);
-                    }
-                    setOpen(false);
+                  onClick={() => {
+                    document.getElementById(item.href.slice(1))?.scrollIntoView({
+                      behavior: "smooth",
+                    });
                   }}
                 >
                   <div className="h-4 w-4">{item.icon}</div>
@@ -120,7 +118,7 @@ const FloatingDockDesktop = ({
 }) => {
   const mouseX = useMotionValue(Infinity);
   const pathname = usePathname();
-  
+
   return (
     <motion.div
       onMouseMove={(e) => mouseX.set(e.pageX)}
@@ -133,11 +131,11 @@ const FloatingDockDesktop = ({
       {items.map((item) => {
         const { onClick, ...rest } = item;
         return (
-          <IconContainer 
-            mouseX={mouseX} 
-            key={item.title} 
+          <IconContainer
+            mouseX={mouseX}
+            key={item.title}
             onClick={onClick}
-            {...rest} 
+            {...rest}
           />
         );
       })}
@@ -208,9 +206,13 @@ function IconContainer({
   };
 
   return (
-    <a 
-      href={href} 
-      onClick={handleClick}
+    <a
+      href={'/app' + href}
+      onClick={(e) => {
+        e.preventDefault();
+        document.getElementById(href.slice(1))?.scrollIntoView({ behavior: "smooth" });
+        handleClick(e);
+      }}
       className="focus:outline-none"
     >
       <motion.div
@@ -218,7 +220,7 @@ function IconContainer({
         style={{ width, height }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        className="relative flex aspect-square items-center justify-center rounded-full bg-gray-200 dark:bg-neutral-800 hover:bg-gray-300 dark:hover:bg-neutral-700 transition-colors"
+        className="relative flex aspect-square items-center justify-center rounded-full bg-gray-200 dark:bg-neutral-800 hover:bg-gray-300 dark:hover:bg-neutral-700 transition-colors floating-dock-button"
       >
         <AnimatePresence>
           {hovered && (
@@ -226,7 +228,7 @@ function IconContainer({
               initial={{ opacity: 0, y: 10, x: "-50%" }}
               animate={{ opacity: 1, y: 0, x: "-50%" }}
               exit={{ opacity: 0, y: 2, x: "-50%" }}
-              className="absolute -top-8 left-1/2 w-fit rounded-md border border-gray-200 bg-gray-100 px-2 py-0.5 text-xs whitespace-pre text-neutral-700 dark:border-neutral-900 dark:bg-neutral-800 dark:text-white"
+              className="absolute -top-8 left-1/2 w-fit rounded-md border border-gray-200 border-solid bg-gray-100 px-2 py-0.5 text-xs whitespace-pre text-neutral-700 dark:border-neutral-900 dark:bg-neutral-800 dark:text-white"
             >
               {title}
             </motion.div>

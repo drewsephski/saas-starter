@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from 'components/ui/card';
 import {
   Settings,
   LogOut,
@@ -11,8 +11,8 @@ import {
   CheckCircle,
   type LucideIcon,
 } from 'lucide-react';
-import { ActivityType } from '@/lib/db/schema';
-import { getActivityLogs } from '@/lib/db/queries';
+import { ActivityType } from 'lib/db/schema';
+import { getActivityLogs } from 'lib/db/queries';
 
 const iconMap: Record<ActivityType, LucideIcon> = {
   [ActivityType.SIGN_UP]: UserPlus,
@@ -68,8 +68,53 @@ function formatAction(action: ActivityType): string {
   }
 }
 
-export default async function ActivityPage() {
-  const logs = await getActivityLogs();
+import { useState, useEffect } from "react";
+
+interface ActivityLog {
+  id: number;
+  action: string;
+  timestamp: Date;
+  ipAddress: string | null;
+  userName: string | null;
+}
+
+export default function ActivityPage() {
+  const [logs, setLogs] = useState<ActivityLog[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  interface RelativeTimes {
+    [key: number]: string;
+  }
+  const [relativeTimes, setRelativeTimes] = useState<RelativeTimes>({});
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getActivityLogs();
+      setLogs(data);
+      setIsLoading(false);
+
+      // Initialize relative times
+      const initialRelativeTimes: RelativeTimes = {};
+      data.forEach(log => {
+        initialRelativeTimes[log.id] = getRelativeTime(new Date(log.timestamp));
+      });
+      setRelativeTimes(initialRelativeTimes);
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      // Update relative times every minute
+      const updatedRelativeTimes: Record<number, string> = {};
+      logs.forEach(log => {
+        updatedRelativeTimes[log.id] = getRelativeTime(new Date(log.timestamp));
+      });
+      setRelativeTimes(updatedRelativeTimes);
+    }, 60000); // 60000 ms = 1 minute
+
+    // Clear interval on unmount
+    return () => clearInterval(intervalId);
+  }, [logs]);
 
   return (
     <section className="flex-1 p-4 lg:p-8">
@@ -81,7 +126,16 @@ export default async function ActivityPage() {
           <CardTitle>Recent Activity</CardTitle>
         </CardHeader>
         <CardContent>
-          {logs.length > 0 ? (
+          {isLoading ? (
+            <div className="flex flex-col items-center justify-center text-center py-12">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                Loading activity...
+              </h3>
+              <p className="text-sm text-gray-500 max-w-sm">
+                Fetching the latest activity logs.
+              </p>
+            </div>
+          ) : logs.length > 0 ? (
             <ul className="space-y-4">
               {logs.map((log) => {
                 const Icon = iconMap[log.action as ActivityType] || Settings;
@@ -90,17 +144,17 @@ export default async function ActivityPage() {
                 );
 
                 return (
-                  <li key={log.id} className="flex items-center space-x-4">
+                  <li key={log.id} className="flex items-center space-x-4 border-b pb-4">
                     <div className="bg-orange-100 rounded-full p-2">
                       <Icon className="w-5 h-5 text-orange-600" />
                     </div>
                     <div className="flex-1">
                       <p className="text-sm font-medium text-gray-900">
                         {formattedAction}
-                        {log.ipAddress && ` from IP ${log.ipAddress}`}
+                        {log.ipAddress ? ` from IP ${log.ipAddress}` : ''}
                       </p>
                       <p className="text-xs text-gray-500">
-                        {getRelativeTime(new Date(log.timestamp))}
+                        {relativeTimes[log.id]}
                       </p>
                     </div>
                   </li>

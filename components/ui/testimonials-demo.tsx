@@ -8,7 +8,7 @@ const testimonials = [
       avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face"
     },
     text: "Using this AI platform has transformed how we handle data analysis. The speed and accuracy are unprecedented.",
-    href: "https://twitter.com/emmaai"
+    href: "/app/https://twitter.com/emmaai"
   },
   {
     author: {
@@ -17,7 +17,7 @@ const testimonials = [
       avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
     },
     text: "The API integration is flawless. We've reduced our development time by 60% since implementing this solution.",
-    href: "https://twitter.com/davidtech"
+    href: "/app/https://twitter.com/davidtech"
   },
   {
     author: {
@@ -34,7 +34,7 @@ const testimonials = [
       avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&h=150&fit=crop&crop=face"
     },
     text: "The customer support team is exceptional. They went above and beyond to help us with our integration.",
-    href: "https://twitter.com/jamesdev"
+    href: "/app/https://twitter.com/jamesdev"
   },
   {
     author: {
@@ -43,7 +43,7 @@ const testimonials = [
       avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face"
     },
     text: "The documentation is clear and comprehensive. We were able to get started in no time.",
-    href: "https://twitter.com/priyatech"
+    href: "/app/https://twitter.com/priyatech"
   }
 ]
 

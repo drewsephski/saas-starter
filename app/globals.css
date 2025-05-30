@@ -273,3 +273,11 @@
     @apply bg-background text-foreground;
   }
 }
+
+.floating-dock-button {
+  transition: all 0.2s ease-in-out;
+}
+
+.floating-dock-button:hover {
+  transform: scale(1.1);
+}

@@ -14,19 +14,19 @@ export interface TestimonialCardProps {
   className?: string
 }
 
-export function TestimonialCard({ 
+export function TestimonialCard({
   author,
   text,
   href,
   className
 }: TestimonialCardProps) {
   const Card = href ? 'a' : 'div'
-  
+
   return (
     <Card
-      {...(href ? { href, target: "_blank", rel: "noopener noreferrer" } : {})}
+      {...(href ? { href: '/app' + href, target: "_blank", rel: "noopener noreferrer" } : {})}
       className={cn(
-        "flex flex-col rounded-lg border-t border-gray-200 dark:border-gray-800",
+        "flex flex-col rounded-lg border-t border-gray-200 border-solid dark:border-gray-800",
         "bg-gradient-to-b from-muted/50 to-muted/10",
         "p-4 text-start sm:p-6",
         "hover:from-muted/60 hover:to-muted/20",
